@@ -5,7 +5,12 @@ class Plant:
     _age: int
     _height: float
 
-    def __init__(self, name: str, age: int, height: float) -> None:
+    def __init__(
+            self,
+            name: str,
+            age: int,
+            height: float
+    ) -> None:
         self._name = name
         self._age = 0
         self._height = 0.0
