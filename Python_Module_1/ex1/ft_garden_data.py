@@ -9,7 +9,7 @@ class Plant:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
-def init_plants():
+def init_plants() -> None:
     rose = Plant()
     rose.name = "Rose"
     rose.height = 25
@@ -24,6 +24,7 @@ def init_plants():
     cactus.name = "Cactus"
     cactus.height = 15
     cactus.age = 120
+
     print("=== Garden Plant Registry ===")
     rose.show()
     sunflower.show()

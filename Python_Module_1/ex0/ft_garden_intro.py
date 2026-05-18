@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-def ft_garden_intro():
-    # plant = input("Plant: ")
-    # height = input("Height: ")
-    # age = input("Age: ")
+
+def ft_garden_intro() -> None:
+    name = "Rose"
+    height = 25
+    age = 30
+
     print("=== Welcome to My Garden ===")
-    print("Plant: Rose")
-    print("Height: 25cm")
-    print("Age: 30 days")
+    print(f"Plant: {name}")
+    print(f"Height: {height}cm")
+    print(f"Age: {age} days")
+    print("")
     print("=== End of Program ===")
 
 

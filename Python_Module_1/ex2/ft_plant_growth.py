@@ -3,67 +3,54 @@
 class Plant:
     name: str
     height: float
-    a_age: int
+    days_old: int
+    daily_growth: float
 
-    def grow(self, growth_factor: float) -> None:
-        self.height += growth_factor
+    def __init__(
+            self,
+            name: str,
+            height: float,
+            days_old: int,
+            daily_growth: float
+    ) -> None:
+        self.name = name
+        self.height = height
+        self.days_old = days_old
+        self.daily_growth = daily_growth
+
+    def grow(self) -> None:
+        self.height += self.daily_growth
 
     def age(self) -> None:
-        self.a_age += 1
+        self.days_old += 1
 
     def show(self) -> None:
-        print(f"{self.name}: {round(self.height, 1)}cm, {self.a_age} days old")
+        print(
+            f"{self.name}: {round(self.height, 1)}cm, "
+            f"{self.days_old} days old"
+        )
 
 
-def init_plant(plant_name: str) -> None:
-    growth_factor = 0.0
+def simulate_week(plant: Plant) -> None:
+    total_growth = 0.0
+
+    plant.show()
+    for day in range(1, 8):
+        print(f"=== Day {day} ===")
+        plant.grow()
+        plant.age()
+        total_growth += plant.daily_growth
+        plant.show()
+
+    print(f"Growth this week: {round(total_growth, 1)}cm")
+
+
+def main() -> None:
     print("=== Garden Plant Growth ===")
 
-    if plant_name == "Rose":
-        rose = Plant()
-        rose.name = plant_name
-        rose.height = 25.0
-        rose.a_age = 30
-
-        rose.show()
-        for day in range(1, 8):
-            print(f"=== Day {day} ===")
-            rose.grow(0.8)
-            rose.age()
-            growth_factor += 0.8
-            rose.show()
-        print(f"Growth this week: {round(growth_factor, 1)}cm")
-
-    elif plant_name == "Cactus":
-        cactus = Plant()
-        cactus.name = plant_name
-        cactus.height = 110.0
-        cactus.a_age = 423
-
-        cactus.show()
-        for day in range(1, 8):
-            print(f"=== Day {day} ===")
-            cactus.grow(1.1)
-            cactus.age()
-            growth_factor += 1.1
-            cactus.show()
-        print(f"Growth this week: {round(growth_factor, 1)}cm")
-
-    else:
-        plant = Plant()
-        plant.name = plant_name
-        plant.height = 5.0
-        plant.a_age = 10
-
-        plant.show()
-        for day in range(1, 8):
-            print(f"=== Day {day} ===")
-            plant.grow(0.3)
-            plant.age()
-            growth_factor += 0.3
-            plant.show()
-        print(f"Growth this week: {round(growth_factor, 1)}cm")
+    plant = Plant("Raspberry", 5.0, 10, 0.3)
+    simulate_week(plant)
 
 
 if __name__ == "__main__":
-    init_plant("Raspberry")
+    main()

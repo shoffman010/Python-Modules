@@ -5,17 +5,18 @@ class Plant:
     height: float
     age: int
 
-    def __init__(self, name: str, height: float, age: int):
+    def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
         self.height = float(height)
         self.age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"Created: {self.name}: {self.height}cm, {self.age} days old")
 
 
-def make_new_objs():
+def main() -> None:
     print("=== Plant Factory Output ===")
+
     rose = Plant("Rose", 25, 30)
     oak = Plant("Oak", 200, 365)
     cactus = Plant("Cactus", 5, 90)
@@ -30,4 +31,4 @@ def make_new_objs():
 
 
 if __name__ == "__main__":
-    make_new_objs()
+    main()
