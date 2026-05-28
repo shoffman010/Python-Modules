@@ -18,7 +18,7 @@ def parse_input(raw_input: str) -> tuple[float, float, float]:
         except ValueError as error:
             raise ValueError(
                 f"Error on parameter '{clean_part}': {error}"
-            ) from None
+            )
 
     return (coordinates[0], coordinates[1], coordinates[2])
 
