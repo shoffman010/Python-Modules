@@ -31,7 +31,6 @@ def test_args() -> None:
     high_score = max(scores)
     low_score = min(scores)
     score_range = high_score - low_score
-
     print(f"Scores processed: {scores}")
     print(f"Total players: {player_count}")
     print(f"Total score: {total}")

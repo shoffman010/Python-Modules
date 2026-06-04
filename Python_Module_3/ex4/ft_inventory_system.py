@@ -74,7 +74,6 @@ def analyze_inventory(inventory: dict[str, int]) -> None:
 
     print_percentages(inventory, total_quantity)
     print_most_and_least(inventory)
-
     inventory.update({"magic_item": 1})
     print(f"Updated inventory: {inventory}")
 
