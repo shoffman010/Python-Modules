@@ -20,11 +20,12 @@ def gen_events() -> Generator[tuple[str, str], None, None]:
         "swim",
         "release"
         ]
-    
+
     while True:
         player = random.choice(players)
         action = random.choice(actions)
         yield (player, action)
+
 
 def consume_events(
     events_list: list[tuple[str, str]],
@@ -55,8 +56,7 @@ def main() -> None:
             f"Got event from list: {event}\n"
             f"Remains in list: {events_list}"
         )
-    
-    
+
+
 if __name__ == "__main__":
     main()
-    
