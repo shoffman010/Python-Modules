@@ -7,34 +7,41 @@ def data_transformer(text_file: str) -> None:
     f = open(text_file)
     transformed_data = ""
     line = f.readline()
+
     while line != "":
         transformed_data += line.strip("\n") + "#\n"
         line = f.readline()
+    
+    f.close()
+
     print(
-        "---\n\n"
+        "---\n"
         f"{transformed_data}"
-        "\n\n---"
+        "\n---"
         )
+    
     print("Enter new file name (or empty): ", end="", flush=True)
     input = sys.stdin.readline().strip()
+
+    if input == "":
+        print("Not saving data.")
+        return
+    
     print(f"Saving data to '{input}'")
+
+    f_new = None
     try:
         f_new = open(input, "w")
-        if f_new == "":
-            print(f"Not saving data")
-            exit()
     except OSError as e:
+        print(f"[STDERR] Error opening file '{input}': {e}",
+              file=sys.stderr)
+        print("Data not saved.")
+    else:
         f_new.write(transformed_data)
-        print(
-        f"Data saved in file '{input}'"    
-        )
-    except PermissionError as e:
-        print(
-            f"[STDERR] Error opening file '{input}': {e}"
-            "Data not saved."
-            )
+        print(f"Data saved in file '{input}'")
     finally:
-        f_new.close()
+        if f_new is not None:
+            f_new.close()
 
 
 def recovery_and_preservation():
@@ -42,19 +49,19 @@ def recovery_and_preservation():
     text = "ancient_fragment.txt"
     print(
         "=== Cyber Archives Recovery & Preservation ===\n"
-        f"Accessing file '{text}"
+        f"Accessing file '{text}'"
     )
     try:
         f = open(text)
         print(
-            "---\n\n"
+            "---\n"
             f"{f.read()}"
-            "\n\n---"
+            "\n---"
             )
+
     except OSError as e:
-        print(f"[STDERR] Error opening file {text}: {e}")
-    except PermissionError as e:
         print(f"[STDERR] Error opening file '{text}': {e}", file=sys.stderr)
+     
     else:
         f.close()
         print(f"File '{text}' closed.")

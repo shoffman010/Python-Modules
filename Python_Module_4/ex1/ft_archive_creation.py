@@ -3,7 +3,7 @@
 def data_transformer(test_file: str):
     print(
         "Transform data:\n"
-        "---\n\n"
+        "---\n"
         )
     f = open(test_file)
     transformer = ""
@@ -13,7 +13,7 @@ def data_transformer(test_file: str):
         line = f.readline()
     print(
         f"{transformer}"
-        "\n\n---"
+        "\n---"
         )
     filename = input("Enter a new file name (or empty): ")
     if filename == "":
@@ -36,9 +36,9 @@ def ft_archive_recovery()-> None:
     try:
         f = open(test_file, "r")
         print(
-        "---\n\n",
+        "---\n",
         f"{f.read()}",
-        "\n\n---",
+        "\n---",
         sep=''
         )
         f.close()

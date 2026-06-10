@@ -8,14 +8,15 @@ def secure_archive(
     try:
         f = open(filename, action)
     except PermissionError as e:
-        print(f"Using '{filename}' to read from an inaccessible file:")
-        return (False, e)
+        print(f"Using '{secure_archive.__name__}' to read from an inaccessible file:")
+        return (False, str(e))
     except OSError as e:
-        print(f"Using '{filename}' to read from a nonexistent file:")
-        return(False, e)
+        print(f"Using '{secure_archive.__name__}' to read from a nonexistent file:")
+        return(False, str(e))
 
     with f:
         if action == "r":
+            print(f"Using '{secure_archive.__name__}' to read from a regular file:")
             text = ""
             content = f.readline()
             while content != "":
@@ -23,16 +24,17 @@ def secure_archive(
                 content = f.readline()
             return (True, text)
         elif action == "w":
-            print(f"\nUsing '{filename}' to write previous content to a new file:")
+            print(f"\nUsing '{secure_archive.__name__}' to write to a new file:")
             with open(filename, "w") as f_new:
                 f_new.write(content)
                 return (True, "Content succesfully written to file")
             
 
 def main() -> None:
-    print("=== Cyber Archives Security ===\n\n")
+    filename = "ancient_fragment.txt"
+    print("=== Cyber Archives Security ===\n")
     operation = secure_archive(
-        "ancient_fragment.txt",
+        filename,
         "r",
         ""
         )
