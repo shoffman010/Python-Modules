@@ -11,7 +11,7 @@ def data_transformer(text_file: str) -> None:
     while line != "":
         transformed_data += line.strip("\n") + "#\n"
         line = f.readline()
-    
+
     f.close()
 
     print(
@@ -19,14 +19,14 @@ def data_transformer(text_file: str) -> None:
         f"{transformed_data}"
         "\n---"
         )
-    
+
     print("Enter new file name (or empty): ", end="", flush=True)
     input = sys.stdin.readline().strip()
 
     if input == "":
         print("Not saving data.")
         return
-    
+
     print(f"Saving data to '{input}'")
 
     f_new = None
@@ -44,7 +44,7 @@ def data_transformer(text_file: str) -> None:
             f_new.close()
 
 
-def recovery_and_preservation():
+def main() -> None:
 
     text = "ancient_fragment.txt"
     print(
@@ -61,7 +61,7 @@ def recovery_and_preservation():
 
     except OSError as e:
         print(f"[STDERR] Error opening file '{text}': {e}", file=sys.stderr)
-     
+
     else:
         f.close()
         print(f"File '{text}' closed.")
@@ -69,4 +69,4 @@ def recovery_and_preservation():
 
 
 if __name__ == "__main__":
-    recovery_and_preservation()
+    main()

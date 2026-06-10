@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def data_transformer(test_file: str):
+def data_transformer(test_file: str) -> None:
     print(
         "Transform data:\n"
         "---\n"
@@ -27,20 +27,19 @@ def data_transformer(test_file: str):
         new_f = open(filename, "w")
     new_f.write(transformer)
     print(f"Data saved in '{filename}'.")
-    
 
 
-def ft_archive_recovery()-> None:
+def ft_archive_recovery() -> None:
     test_file = 'ancient_fragment.txt'
     print(f"Accessing file '{test_file}'")
     try:
         f = open(test_file, "r")
         print(
-        "---\n",
-        f"{f.read()}",
-        "\n---",
-        sep=''
-        )
+            "---\n",
+            f"{f.read()}",
+            "\n---",
+            sep=''
+            )
         f.close()
         print(f"File '{test_file} closed.\n")
         data_transformer(test_file)
@@ -48,14 +47,9 @@ def ft_archive_recovery()-> None:
         print(
             f"Error opening file '{test_file}': {e}"
         )
-    except PermissionError as e:
-        print(
-            f"Error opening file '{test_file}': {e}"
-        )
 
 
-
-def main():
+def main() -> None:
     print("=== Cyber Archives Recovery & Preservation ===")
     ft_archive_recovery()
 
