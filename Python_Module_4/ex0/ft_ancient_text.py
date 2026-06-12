@@ -6,9 +6,9 @@ def ft_archive_recovery() -> None:
     try:
         reader = open(test_file, "r")
         print(
-            "---\n\n",
+            "---\n",
             f"{reader.read()}",
-            "\n\n---",
+            "\n---",
             sep=''
         )
         # breakpoint()
