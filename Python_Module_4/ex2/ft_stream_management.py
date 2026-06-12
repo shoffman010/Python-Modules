@@ -3,69 +3,89 @@
 import sys
 
 
-def data_transformer(text_file: str) -> None:
-    f = open(text_file)
-    transformed_data = ""
-    line = f.readline()
+def data_transformer(file_name: str) -> None:
+    f = None
+    try:
+        f = open(file_name, "r")
+        content = f.read().replace("\n", "#\n")
+    except OSError as e:
+        print(
+            f"[STDERR] Error opening file '{file_name}': {e}",
+            file=sys.stderr
+        )
+        return
+    finally:
+        if f is not None:
+            f.close()
 
-    while line != "":
-        transformed_data += line.strip("\n") + "#\n"
-        line = f.readline()
-
-    f.close()
+    if not content.endswith("\n"):
+        content = content + "#\n"
 
     print(
-        "---\n"
-        f"{transformed_data}"
+        "Transform data:\n"
+        "---\n\n"
+        f"{content}"
         "\n---"
-        )
+    )
 
     print("Enter new file name (or empty): ", end="", flush=True)
-    input = sys.stdin.readline().strip()
+    new_file_name = sys.stdin.readline().strip()
 
-    if input == "":
+    if new_file_name == "":
         print("Not saving data.")
         return
 
-    print(f"Saving data to '{input}'")
+    print(f"Saving data to '{new_file_name}'")
 
     f_new = None
     try:
-        f_new = open(input, "w")
+        f_new = open(new_file_name, "w")
+        f_new.write(content)
     except OSError as e:
-        print(f"[STDERR] Error opening file '{input}': {e}",
-              file=sys.stderr)
+        print(
+            f"[STDERR] Error opening file '{new_file_name}': {e}",
+            file=sys.stderr
+        )
         print("Data not saved.")
     else:
-        f_new.write(transformed_data)
-        print(f"Data saved in file '{input}'")
+        print(f"Data saved in file '{new_file_name}'")
     finally:
         if f_new is not None:
             f_new.close()
 
 
 def main() -> None:
-
-    text = "ancient_fragment.txt"
-    print(
-        "=== Cyber Archives Recovery & Preservation ===\n"
-        f"Accessing file '{text}'"
-    )
-    try:
-        f = open(text)
+    if len(sys.argv) == 2:
         print(
-            "---\n"
-            f"{f.read()}"
-            "\n---"
+            "=== Cyber Archives Recovery & Preservation ===\n"
+            f"Accessing file '{sys.argv[1]}'"
+        )
+
+        f = None
+        opened = False
+
+        try:
+            f = open(sys.argv[1], "r")
+            opened = True
+            print(
+                "---\n\n"
+                f"{f.read()}"
+                "\n\n---"
             )
+        except OSError as e:
+            print(
+                f"[STDERR] Error opening file '{sys.argv[1]}': {e}",
+                file=sys.stderr
+            )
+        finally:
+            if f is not None:
+                f.close()
+                print(f"File '{sys.argv[1]}' closed.\n")
 
-    except OSError as e:
-        print(f"[STDERR] Error opening file '{text}': {e}", file=sys.stderr)
-
+        if opened:
+            data_transformer(sys.argv[1])
     else:
-        f.close()
-        print(f"File '{text}' closed.")
-        data_transformer(text)
+        print("Usage: ft_stream_management.py <file>")
 
 
 if __name__ == "__main__":

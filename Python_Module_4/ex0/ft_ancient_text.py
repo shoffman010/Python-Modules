@@ -1,32 +1,28 @@
 #!/usr/bin/env python3
 
-def ft_archive_recovery() -> None:
-    test_file = 'ancient_fragment.txt'
-    print(f"Accessing file '{test_file}'")
+import sys
+
+
+def ft_archive_recovery(file_name: str) -> None:
+    reader = None
     try:
-        reader = open(test_file, "r")
-        print(
-            "---\n",
-            f"{reader.read()}",
-            "\n---",
-            sep=''
-        )
-        # breakpoint()
+        reader = open(file_name, "r")
+        print("---\n\n", f"{reader.read()}", "\n\n---", sep="")
     except OSError as e:
-        print(
-            f"Error opening file '{test_file}': {e}"
-        )
-    except PermissionError as e:
-        print(
-            f"Error opening file '{test_file}': {e}"
-        )
-    else:
-        reader.close()
+        print(f"Error opening file '{file_name}': {e}")
+    finally:
+        if reader is not None:
+            reader.close()
+            print(f"File '{file_name}' closed.")
 
 
 def main() -> None:
-    print("=== Cyber Archives Recovery ===")
-    ft_archive_recovery()
+    if len(sys.argv) == 2:
+        print("=== Cyber Archives Recovery ===")
+        print(f"Accessing file '{sys.argv[1]}'")
+        ft_archive_recovery(sys.argv[1])
+    else:
+        print("Usage: ft_ancient_text.py <file>")
 
 
 if __name__ == "__main__":

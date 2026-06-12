@@ -5,20 +5,20 @@ def secure_archive(
         action: str = "r",
         content: str = ""
         ) -> tuple[bool, str]:
+    if action not in ("r", "w"):
+        return (False, f"Invalid mode '{action}'")
 
     try:
         with open(filename, action) as f:
             if action == "r":
                 return (True, f.read())
 
-            elif action == "w":
+            else:
                 f.write(content)
                 return (True, "Content successfully written to file")
 
     except OSError as e:
         return (False, str(e))
-
-    return (False, "Invalid action")
 
 
 def main() -> None:
