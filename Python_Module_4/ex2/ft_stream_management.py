@@ -62,11 +62,8 @@ def main() -> None:
         )
 
         f = None
-        opened = False
-
         try:
             f = open(sys.argv[1], "r")
-            opened = True
             print(
                 "---\n\n"
                 f"{f.read()}"
@@ -77,13 +74,14 @@ def main() -> None:
                 f"[STDERR] Error opening file '{sys.argv[1]}': {e}",
                 file=sys.stderr
             )
+        else:
+            f.close()
+            f = None
+            print(f"File '{sys.argv[1]}' closed.\n")
+            data_transformer(sys.argv[1])
         finally:
             if f is not None:
                 f.close()
-                print(f"File '{sys.argv[1]}' closed.\n")
-
-        if opened:
-            data_transformer(sys.argv[1])
     else:
         print("Usage: ft_stream_management.py <file>")
 
