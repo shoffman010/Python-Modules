@@ -20,6 +20,8 @@ def ft_archive_recovery() -> None:
         print(
             f"Error opening file '{test_file}': {e}"
         )
+    else:
+        reader.close()
 
 
 def main() -> None:

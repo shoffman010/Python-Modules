@@ -10,7 +10,6 @@ def secure_archive(
         f = open(filename, action)
     except OSError as e:
         return (False, str(e))
-
     with f:
         if action == "r":
             return (True, f.read())
