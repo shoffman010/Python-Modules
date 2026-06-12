@@ -7,16 +7,16 @@ def secure_archive(
         ) -> tuple[bool, str]:
 
     try:
-        f = open(filename, action)
+        with open(filename, action) as f:
+            if action == "r":
+                return (True, f.read())
+
+            elif action == "w":
+                f.write(content)
+                return (True, "Content successfully written to file")
+
     except OSError as e:
         return (False, str(e))
-    with f:
-        if action == "r":
-            return (True, f.read())
-
-        if action == "w":
-            f.write(content)
-            return (True, "Content successfully written to file")
 
     return (False, "Invalid action")
 
