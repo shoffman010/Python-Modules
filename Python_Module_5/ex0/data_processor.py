@@ -20,7 +20,7 @@ class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if not isinstance(data, dict):
             return False
-        if len(data.keys()) is not 2:
+        if len(data.keys()) != 2:
             return False
         if "log_level" not in data:
             return False
