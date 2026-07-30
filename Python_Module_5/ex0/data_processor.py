@@ -109,37 +109,61 @@ class LogProcessor(DataProcessor):
 
 
 def main() -> None:
+    print("=== Code Nexus - Data Processor ===\n")
+
     num_proc = NumericProcessor()
+    print("Testing Numeric Processor...")
+    print(f"Trying to validate input '42': {num_proc.validate(42)}")
+    print(
+        "Trying to validate input 'Hello': "
+        f"{num_proc.validate('Hello')}"
+    )
+    print("Test invalid ingestion of string 'foo' without prior validation:")
+    try:
+        num_proc.ingest("foo")
+    except ValueError as error:
+        print(f"Got exception: {error}")
+
+    numeric_data = [1, 2, 3, 4, 5]
+    print(f"Processing data: {numeric_data}")
+    num_proc.ingest(numeric_data)
+    print("Extracting 3 values...")
+    for _ in range(3):
+        rank, value = num_proc.output()
+        print(f"Numeric value {rank}: {value}")
+
     text_proc = TextProcessor()
+    print("\nTesting Text Processor...")
+    print(f"Trying to validate input '42': {text_proc.validate(42)}")
+    text_data = ["Hello", "Nexus", "World"]
+    print(f"Processing data: {text_data}")
+    text_proc.ingest(text_data)
+    print("Extracting 1 value...")
+    rank, value = text_proc.output()
+    print(f"Text value {rank}: {value}")
+
     log_proc = LogProcessor()
-
-    print("Numeric validation:", num_proc.validate([1, 2.5, 3]))
-    print("Text validation:", text_proc.validate(["Hello", "Nexus"]))
-
-    logs: list[LogEntry] = [
+    print("\nTesting Log Processor...")
+    print(
+        "Trying to validate input 'Hello': "
+        f"{log_proc.validate('Hello')}"
+    )
+    log_data: list[LogEntry] = [
         {
             "log_level": "NOTICE",
             "log_message": "Connection to server",
         },
         {
             "log_level": "ERROR",
-            "log_message": "Unauthorized access",
+            "log_message": "Unauthorized access!!",
         },
     ]
-    print("Log validation:", log_proc.validate(logs))
-
-    try:
-        num_proc.ingest("foo")
-    except ValueError as error:
-        print("Expected ingestion error:", error)
-
-    num_proc.ingest([1, 2.5, 3])
-    text_proc.ingest(["Hello", "Nexus"])
-    log_proc.ingest(logs)
-
-    print("Numeric output:", num_proc.output())
-    print("Text output:", text_proc.output())
-    print("Log output:", log_proc.output())
+    print(f"Processing data: {log_data}")
+    log_proc.ingest(log_data)
+    print("Extracting 2 values...")
+    for _ in range(2):
+        rank, value = log_proc.output()
+        print(f"Log entry {rank}: {value}")
 
 
 if __name__ == "__main__":
