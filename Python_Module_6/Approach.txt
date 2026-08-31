@@ -1,0 +1,35 @@
+All built-in allowed (excluding eval() and exec())
+Also all classes and collections 
+X not allowed to modify sys.path
+
+
+elements.py
+	create_fire() -> string (Fire element created)
+	create_water() -> string (Water element created)
+
+
+alchemy/elements.py
+	create_earth() -> string (Earth element created)
+	create_air() -> string (Air element created)
+
+alchemy/__init__.py
+	for importing the alchemy module
+
+ft_alembic_0.py
+	use import to access elements.py -> Fire
+
+ft_alembic_1.py 
+	use from ... import to access elements.py -> Water
+
+ft_alembic_2.py
+	use import to access alchemy/elements.py -> Earth
+
+ft_alembic_3.py
+	use from ... import to access alchemy/elements.py -> Air
+
+ft_alembic_4.py
+	import alchemy to create air. The create_earth() will not be exposed and raise an
+	exception when called. Also a mypy error will raise on purpose
+
+ft_alembic_5.py
+	from alchemy import to create air
