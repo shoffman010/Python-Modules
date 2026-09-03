@@ -1,5 +1,6 @@
 import elements
 
+
 def main() -> None:
     print("=== Alembic 0 ===")
     print("Using: 'import ...' structure to access elements.py")
@@ -10,8 +11,9 @@ def main() -> None:
     if Test != "Fire element created":
         print("Failed")
         return
-    
-    print(f"{Test}\n")
+
+    print(Test)
+
 
 if __name__ == "__main__":
     main()

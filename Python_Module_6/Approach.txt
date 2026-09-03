@@ -2,6 +2,9 @@ All built-in allowed (excluding eval() and exec())
 Also all classes and collections 
 X not allowed to modify sys.path
 
+Part I
+
+Import basics
 
 elements.py
 	create_fire() -> string (Fire element created)
@@ -13,23 +16,92 @@ alchemy/elements.py
 	create_air() -> string (Air element created)
 
 alchemy/__init__.py
-	for importing the alchemy module
+	from .elements import create_air
+	__all__ = ["create_air"] (Is used for from .elements import * wildcard)
+	.elements needed to make sure it searches in the directory the init is in. Otherwise with
+	just elements it would end up taking the one from the parent directory instead.
 
 ft_alembic_0.py
+	import elements
 	use import to access elements.py -> Fire
 
-ft_alembic_1.py 
+ft_alembic_1.py
+	from elements import create_water
 	use from ... import to access elements.py -> Water
 
 ft_alembic_2.py
+	import alchemy.elements
 	use import to access alchemy/elements.py -> Earth
 
 ft_alembic_3.py
+	from alchemy import elements
 	use from ... import to access alchemy/elements.py -> Air
 
 ft_alembic_4.py
+	import alchemy
 	import alchemy to create air. The create_earth() will not be exposed and raise an
 	exception when called. Also a mypy error will raise on purpose
 
 ft_alembic_5.py
-	from alchemy import to create air
+	from alchemy import create_air
+	Works because of __init__.py having the .elements import create_air
+
+---------------------------------------------------------------------------------------------------
+
+Part II
+
+Nested Imports
+
+alchemy/potions.py
+	healing_potion() -> str (earth + air)
+	strength_potion() -> str (fire + water)
+
+ft_distillation_0.py
+	from alchemy.potions import strength_potion, healing_potion
+
+ft_distillation_1.py
+	import alchemy
+	improve __init__.py with package alias to change healing_potion() to heal()
+
+---------------------------------------------------------------------------------------------------
+
+Part III
+
+Absolute vs Relative Imports
+
+alchemy/transmutation/recipes.py
+	lead_to_gold() -> str 
+	at least one absolute import and one relative
+
+ft_transmutation_0.py
+	import alchemy/transmutation/recipes
+	transform lead to gold
+
+ft_transmutation_1.py
+	import transmutation package containing recipes
+	transform lead to gold
+
+ft_transmutation_2.py
+	import alchemy (adjust __init__.py)
+	transform lead to gold
+
+May need to update / add new files
+
+---------------------------------------------------------------------------------------------------
+
+Part IV
+
+Circular dependencies
+
+alchemy/grimoire/light_spellbook.py
+	light_spell_allowed_ingredients() -> list 
+	returns a list of allowed ingredients, earth, air, fire, water
+
+	light_spell_record(spell_name: str, ingredients: str) -> str
+	returns a string that indicated whether a spell is recorded or rejected
+
+alchemy/grimoire/light_validator.py
+	validate_ingredients(ingredients: str) -> str
+	returns a string with the ingredients and keyword of VALID or INVALID
+	valid if include at least one of the allowed ingredients from the light_spellbook
+	case insensitive 

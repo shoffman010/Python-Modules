@@ -1,17 +1,19 @@
-from alchemy import elements
+import alchemy.elements
+
 
 def main() -> None:
     print("=== Alembic 2 ===")
     print("Accessing alchemy/elements.py using 'import ...' structure")
     print("Testing create_earth: ", end="")
 
-    Test = elements.create_earth()
+    Test = alchemy.elements.create_earth()
 
     if Test != "Earth element created":
         print("Failed")
         return
-    
-    print(f"{Test}\n")
+
+    print(Test)
+
 
 if __name__ == "__main__":
     main()

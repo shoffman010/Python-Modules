@@ -1,5 +1,6 @@
 from elements import create_water
 
+
 def main() -> None:
     print("=== Alembic 1 ===")
     print("Using: 'from ... import ...' structure to access elements.py")
@@ -10,8 +11,9 @@ def main() -> None:
     if Test != "Water element created":
         print("Failed")
         return
-    
-    print(f"{Test}\n")
+
+    print(Test)
+
 
 if __name__ == "__main__":
     main()
