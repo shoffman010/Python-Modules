@@ -124,7 +124,7 @@ def main() -> None:
     except ValueError as error:
         print(f"Got exception: {error}")
 
-    numeric_data = [1, 2, 3, 4, 5]
+    numeric_data: list[int | float] = [1, 2, 3, 4, 5]
     print(f"Processing data: {numeric_data}")
     num_proc.ingest(numeric_data)
     print("Extracting 3 values...")
@@ -133,13 +133,9 @@ def main() -> None:
         print(f"Numeric value {rank}: {value}")
 
     text_proc = TextProcessor()
-    text_data = ["Hello", "Nexus", "World"]
     print("\nTesting Text Processor...")
-    print(
-        f"Trying to validate input {text_data}: "
-        f"{text_proc.validate(text_data)}"
-    )
     print(f"Trying to validate input '42': {text_proc.validate(42)}")
+    text_data = ["Hello", "Nexus", "World"]
     print(f"Processing data: {text_data}")
     text_proc.ingest(text_data)
     print("Extracting 1 value...")
@@ -147,6 +143,11 @@ def main() -> None:
     print(f"Text value {rank}: {value}")
 
     log_proc = LogProcessor()
+    print("\nTesting Log Processor...")
+    print(
+        "Trying to validate input 'Hello': "
+        f"{log_proc.validate('Hello')}"
+    )
     log_data: list[LogEntry] = [
         {
             "log_level": "NOTICE",
@@ -157,15 +158,6 @@ def main() -> None:
             "log_message": "Unauthorized access!!",
         },
     ]
-    print("\nTesting Log Processor...")
-    print(
-        f"Trying to validate input {log_data}: "
-        f"{log_proc.validate(log_data)}"
-    )
-    print(
-        "Trying to validate input 'Hello': "
-        f"{log_proc.validate('Hello')}"
-    )
     print(f"Processing data: {log_data}")
     log_proc.ingest(log_data)
     print("Extracting 2 values...")
