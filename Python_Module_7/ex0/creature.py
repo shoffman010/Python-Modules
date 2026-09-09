@@ -13,7 +13,7 @@ class Creature(ABC):
     def describe(self) -> str:
         """Printing the description of the creature using inheritance"""
         if self is Creature:
-            raise ValueError
+            raise TypeError
         return (f"{self.__class__.__name__} is a {self._type} {__class__.__name__}")
 
 

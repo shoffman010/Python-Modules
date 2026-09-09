@@ -7,4 +7,6 @@ Exercise 0:
 
 	The package cannot expose Creature directly, only expose it's factories
 	battle.py
-		Create(ABC)
+
+Exercise 1:
+	

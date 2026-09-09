@@ -17,7 +17,7 @@ class FlameFactory(CreatureFactory):
 
       def create_evolved(self: Creature):
             if not isinstance(self, Flameling):
-                  raise ValueError
+                  raise TypeError
             return (Pyrodon())
 
 
@@ -27,5 +27,5 @@ class AquaFactory(CreatureFactory):
 
         def create_evolved(self: Creature):
               if not isinstance(self, Aquabub):
-                    raise ValueError
+                    raise TypeError
               return (Torragon())
