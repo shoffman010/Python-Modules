@@ -1,0 +1,10 @@
+All built-in functions allowed (besides eval() and exec())
+exceptions need to be handled
+Every exercise folder needs an __init__.py mandatory
+
+Exercise 0:
+	abstract factory design pattern
+
+	The package cannot expose Creature directly, only expose it's factories
+	battle.py
+		Create(ABC)
