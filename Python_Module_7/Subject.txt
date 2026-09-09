@@ -9,4 +9,7 @@ Exercise 0:
 	battle.py
 
 Exercise 1:
+	Implementing new factory with more Creatures of other types, that use the module of ex0
+
+Excercise 2:
 	

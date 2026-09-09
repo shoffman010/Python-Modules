@@ -1,31 +1,28 @@
 from abc import ABC, abstractmethod
 from .creature import Creature, Flameling, Pyrodon, Aquabub, Torragon
 
-class CreatureFactory(ABC):
-      @abstractmethod
-      def create_base():
-            raise NotImplementedError
 
-      @abstractmethod
-      def create_evolved():
-            raise NotImplementedError
+class CreatureFactory(ABC):
+    @abstractmethod
+    def create_base(self) -> Creature:
+        raise NotImplementedError
+
+    @abstractmethod
+    def create_evolved(self) -> Creature:
+        raise NotImplementedError
 
 
 class FlameFactory(CreatureFactory):
-      def create_base():
-            return (Flameling())
+    def create_base(self) -> Creature:
+        return (Flameling())
 
-      def create_evolved(self: Creature):
-            if not isinstance(self, Flameling):
-                  raise TypeError
-            return (Pyrodon())
+    def create_evolved(self) -> Creature:
+        return (Pyrodon())
 
 
 class AquaFactory(CreatureFactory):
-        def create_base():
-              return (Aquabub())
+    def create_base(self) -> Creature:
+        return (Aquabub())
 
-        def create_evolved(self: Creature):
-              if not isinstance(self, Aquabub):
-                    raise TypeError
-              return (Torragon())
+    def create_evolved(self) -> Creature:
+        return (Torragon())

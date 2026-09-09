@@ -2,54 +2,46 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-
+    _type: str = ""
 
     @abstractmethod
     def attack(self) -> str:
-        """""Abstract method to enforce attack as a method needed to be provided
-        by the classes inheriting from Creature"""
         raise NotImplementedError
 
     def describe(self) -> str:
-        """Printing the description of the creature using inheritance"""
-        if self is Creature:
-            raise TypeError
-        return (f"{self.__class__.__name__} is a {self._type} {__class__.__name__}")
+        return (
+            f"{self.__class__.__name__} is a"
+            f"{self._type} {Creature.__class__.__name__}"
+        )
 
 
 class Flameling(Creature):
+    def __init__(self) -> None:
+        self._type = "Fire type"
 
-    _type = "Fire type"
-
-    @property
     def attack(self) -> str:
         return ("Flameling uses Ember!")
 
 
 class Pyrodon(Creature):
-    """Evolved from Flameling"""
+    def __init__(self) -> None:
+        self._type = "Fire/Flying type"
 
-    _type = "Fire type"
-
-    @property
-    def attack(self):
+    def attack(self) -> str:
         return ("Pyrodon uses Flamethrower!")
 
 
 class Aquabub(Creature):
+    def __init__(self) -> None:
+        self._type = "Water type"
 
-    _type = "Water type"
-
-    @property
-    def attack(self):
+    def attack(self) -> str:
         return ("Aquabub uses Water Gun!")
 
 
 class Torragon(Creature):
-    """Evolved from Aquabub"""
+    def __init__(self) -> None:
+        self._type = "Water type"
 
-    _type = "Water type"
-
-    @property
-    def attack(self):
-            return ("Torragon uses Hydro Pump!")
+    def attack(self) -> str:
+        return ("Torragon uses Hydro Pump!")
