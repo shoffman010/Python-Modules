@@ -11,6 +11,7 @@ from ex2 import (
 )
 from typing import TypeAlias
 
+
 Opponent: TypeAlias = tuple[CreatureFactory, BattleStrategy]
 PreparedOpponent: TypeAlias = tuple[Creature, BattleStrategy]
 
@@ -41,6 +42,7 @@ def battle(opponents: list[Opponent]) -> None:
 
     except StrategyError as error:
         print(f" Battle error, aborting torunament: {error}")
+
 
 def main() -> None:
     tournament_0: list[Opponent] = [
