@@ -10,8 +10,8 @@ class Creature(ABC):
 
     def describe(self) -> str:
         return (
-            f"{self.__class__.__name__} is a"
-            f"{self._type} {Creature.__class__.__name__}"
+            f"{self.__class__.__name__} is a "
+            f"{self._type} Creature"
         )
 
 
