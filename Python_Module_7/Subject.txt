@@ -3,13 +3,96 @@ exceptions need to be handled
 Every exercise folder needs an __init__.py mandatory
 
 Exercise 0:
-	abstract factory design pattern
+	Abstract Factory:
+		Improving logic to be reuseable. The different Creature with different types can be constructed through the
+		Factories that inherent from the CreatureFactory. all of them have the abstract methods that need to be
+		implemented like create_base and create_evolved to make an Creature of that factory.
+		You can just implement more that inherit from the factory, using the abstract methods.
+
 
 	The package cannot expose Creature directly, only expose it's factories
 	battle.py
 
 Exercise 1:
+	Abstract Capabilities:
+		Compose multiple inheritances into one class. For example Sproutling inherits from both Creature and HealCapabilities.
+		But not every Creature should have HealCapabilities and also maybe something not being a Creature should have these
+		Capabilities. This composes through multiple inheritances interfaces / capabilities.
+
+		For TransformCapability it's important to understand object states. Because depending on there transformation state they
+		attack differently. So for example a boolean is used to change an attribute to True when the transform() method happened,
+		and to False as soon as the revert() method has been used.
+		So later in these specific Classes that inherit from both Creature and TransformCapability, the attack() method needs to
+		check that attribute inside that specific class being called to decide which attack is being used.
+
+
 	Implementing new factory with more Creatures of other types, that use the module of ex0
 
 Excercise 2:
-	
+
+	Strategy Pattern:
+		BattleStrategy inherits from ABC to compose an interface, that enforces specific methods being used. In this case
+		it's about act() and is_valid(). 
+		The NormalStrategy can be used on any creature, because it just involved the simple
+		abstractmethod attack() that any Creature has to have.
+		DefensiveStrategy is only valid for Creatures AND HealCapability, any other will raise an 
+		StrategyException.
+		AggressiveStrategy is only valid for Creatures AND TransformCapability, any other inheritance will raise StrategyException.
+
+		The DefensiveStrategy and AggressiveStrategy use methods specific to the capabilities that they inherit from, so they
+		need to be checked if they are valid, to not have any bugs or runtime errors. This is called defensive API design.
+
+		Generally CreatureFactory + BattleStrategy are the concept of composition, because the behavior is attached externally.
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Product abstraction -> Creature
+
+Capability abstraction -> TransformCapability, HealCapability
+
+Behavior abstraction -> BattleStrategy
+
+Creature: 
+	"What kind of entity is this?"
+
+HealCapability / TransformCapability:
+	"What can this entity do?"
+
+BattleStrategy:
+	"How should this entity be used in this situation?"
+
+CreatureFactory:
+	"How should these enitites be constructed"
+----------------------------------------------------------------------------------------------------------------------------------
+ABC
+	language / Object oriented programming mechanism
+
+Abstract Factory
+	creational design pattern
+
+Capability ABC
+	interface-like behavioral contract
+
+Strategy
+	behavioral design pattern (composition)
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+S - Single Responsibility
+	Factories construct.
+	Strategies define battle algorithms.
+	Creatures represent creatures.
+	Capabilities represent capabilites.
+
+O - Open/Closed
+	Add another factory/strategy/capability implementation without rewriting generic battle code.
+
+L - Liskov Substitution
+	A concrete CreatureFactory must work anywhere CreatureFactory is promised.
+
+I - Interface Segregation
+	Don't force heal/transform into all Creatures.
+
+D - Dependency Inversion
+	High-level battle code depens on CreatureFactory / BattleStrategy abstractions rather than concrete classes.
+
