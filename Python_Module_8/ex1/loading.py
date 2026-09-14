@@ -49,44 +49,21 @@ def analyze_matrix_data(modules):
     numpy = modules["numpy"]
     pyplot = importlib.import_module("matplotlib.pyplot")
 
-    data_point_count = 1000
-    generator = numpy.random.default_rng(42)
     matrix_data = pandas.DataFrame(
-        {
-            "signal": generator.normal(50, 12, data_point_count),
-            "anomaly_score": generator.random(data_point_count),
-        }
-    )
-    matrix_data["moving_average"] = (
-        matrix_data["signal"].rolling(window=25, min_periods=1).mean()
+        {"signal": numpy.random.default_rng(42).random(1000)}
     )
 
     print("\nAnalyzing Matrix data...")
     print(f"Processing {len(matrix_data)} data points...")
+    print(f"Average signal: {matrix_data['signal'].mean():.2f}")
     print("Generating visualization...")
 
-    figure, axis = pyplot.subplots(figsize=(10, 5))
-    axis.plot(
-        numpy.arange(data_point_count),
-        matrix_data["signal"],
-        color="green",
-        alpha=0.35,
-        label="Matrix signal",
-    )
-    axis.plot(
-        numpy.arange(data_point_count),
-        matrix_data["moving_average"],
-        color="black",
-        linewidth=2,
-        label="Moving average",
-    )
-    axis.set_title("Matrix Signal Analysis")
-    axis.set_xlabel("Data point")
-    axis.set_ylabel("Signal strength")
-    axis.legend()
-    figure.tight_layout()
-    figure.savefig("matrix_analysis.png")
-    pyplot.close(figure)
+    pyplot.plot(matrix_data["signal"])
+    pyplot.title("Matrix Data")
+    pyplot.xlabel("Data point")
+    pyplot.ylabel("Signal")
+    pyplot.savefig("matrix_analysis.png")
+    pyplot.close()
 
     print("\nAnalysis complete!")
     print("Results saved to: matrix_analysis.png")
