@@ -1,0 +1,41 @@
+Virtual Environments and Environment configuration
+
+ex0: Virtual environment
+	Which Pythong + which installed packages am I using?
+
+ex1: Dependency management
+	Which packages and version does my application need?
+
+ex2: Environment configuration
+	What configuration/secrets should this execution use?
+
+	Is focusing on environment variables and .env files.
+	Goal is to create a secure configuration system using these.
+	Using oracle.py to create these configurations, so you don't end up hardcoding
+	these variables. 
+
+	Configuration answers:
+		Which database should I connect to?
+		Which API key should I use?
+		Am I running in development or production?
+		How much logging should I produce?
+		Which server should I communcate with?
+
+	Very important usage, is about API keys being pushed over git, which risks
+	the security of your program. The uploaded API key would be accessible, 
+	These secrets are kept safe with Environment configuration.
+
+	Also if your database changes, instead of changing oracle.py you just change the database 
+	inside your .env to apply these changes.
+	So this environment variable only needs to change, not the entire structure of the program.
+
+	There are environment variables already present in the shell, such as $PATH and $HOME for example.
+	Creating new environent variables in Shell is also easy:
+		export MATRIX_MODE=development
+		echo "MATRIX_MODE"
+		development
+	That is fundamentally all what an environment variable is.
+
+	Through the os module you gain access to these environment variables.
+
+	.env is just a test file with Key-Value pairs.
