@@ -158,7 +158,7 @@ def main() -> None:
     tomato.grow()
     tomato.age()
     tomato.show()
-
+    print(dir(rose))
 
 if __name__ == "__main__":
     main()

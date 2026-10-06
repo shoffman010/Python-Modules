@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-class Plant:
+class Plant(object):
     name: str
     height: int
     age: int
