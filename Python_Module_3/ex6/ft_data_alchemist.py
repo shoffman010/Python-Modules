@@ -38,6 +38,7 @@ def main() -> None:
         if score > score_average
         }
     print(f"High scores: {high_score}")
+    breakpoint()
 
 
 if __name__ == "__main__":
